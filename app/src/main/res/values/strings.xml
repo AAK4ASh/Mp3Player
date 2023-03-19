@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Mp3 Player</string>
+    <string name="shuffle_btn">Shuffle</string>
+    <string name="favourites_btn">Favourites</string>
+    <string name="playlist_btn">Playlist</string>
+    <string name="all_songs">All Songs</string>
+    <string name="music_name">music name</string>
+</resources>
