@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.main.mp3player.databinding.ActivityMainBinding
 import java.io.File
 
@@ -18,10 +19,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestPermission()
-        getAudioFiles()
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+        getAudioFiles()
     }
 
     @SuppressLint("Range")
@@ -37,7 +38,10 @@ class MainActivity : AppCompatActivity() {
             }while (cursor.moveToNext())
             cursor.close()
         }
-   }
+        musicAdapter=MusicAdapter(list)
+        binding.recylerList.layoutManager=LinearLayoutManager(this)
+        binding.recyclerList.adapter=musicAdapter
+    }
 
     private fun requestPermission(){
         if (ActivityCompat.checkSelfPermission(this,android.Manifest.permission.WRITE_EXTERNAL_STORAGE)!=PackageManager.PERMISSION_GRANTED )
