@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
         getAudioFiles()
     }
 
+
     @SuppressLint("Range")
     private fun getAudioFiles() {
         val filePath = "/path/to/song.mp3"
@@ -39,7 +40,7 @@ class MainActivity : AppCompatActivity() {
             cursor.close()
         }
         musicAdapter=MusicAdapter(list)
-        binding.recylerList.layoutManager=LinearLayoutManager(this)
+        binding.recyclerList.layoutManager=LinearLayoutManager(this)
         binding.recyclerList.adapter=musicAdapter
     }
 
@@ -66,4 +67,5 @@ class MainActivity : AppCompatActivity() {
         val title = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE)
         return Music(title ?: file.name)
     }
+
 }
