@@ -12,6 +12,7 @@ class MusicAdapter (private val musics: MutableList<Music>):// new var and insid
     inner class MusicViewHolder(private val binding: RecyclerListBinding):RecyclerView.ViewHolder(binding.root){
         val musicName=binding.textView
 
+
        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MusicViewHolder {//when needed provide a view holder
@@ -26,11 +27,6 @@ class MusicAdapter (private val musics: MutableList<Music>):// new var and insid
     }
     override fun getItemCount(): Int {
         return musics.size
-    }
-
-    fun add(music: Music) {
-        musics.add(music)
-        notifyItemInserted(-1)
     }
 
 

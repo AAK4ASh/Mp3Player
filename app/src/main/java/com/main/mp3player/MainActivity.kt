@@ -3,6 +3,7 @@ package com.main.mp3player
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.media.MediaMetadataRetriever
+import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
@@ -15,6 +16,7 @@ import java.io.File
 class MainActivity : AppCompatActivity() {
     private lateinit var binding:ActivityMainBinding
     private lateinit var musicAdapter: MusicAdapter
+    private lateinit var mediaPlayer: MediaPlayer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,13 +30,12 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("Range")
     private fun getAudioFiles() {
-        val filePath = "/path/to/song.mp3"
-        val music = createMusicFromPath(filePath)
         val list= mutableListOf<Music>()
         val cursor= contentResolver.query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,null,null,null,null)
         if(cursor!=null && cursor.moveToFirst()){
             do {
                 val filePath= cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DATA))
+                val music = createMusicFromPath(filePath)
                 list.add(music)
             }while (cursor.moveToNext())
             cursor.close()
@@ -67,5 +68,4 @@ class MainActivity : AppCompatActivity() {
         val title = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE)
         return Music(title ?: file.name)
     }
-
 }
